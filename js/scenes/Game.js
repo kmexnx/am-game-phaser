@@ -23,11 +23,17 @@ class Game extends Phaser.Scene {
         // Configurar controles
         this.cursors = this.input.keyboard.createCursorKeys();
         
+        // Añadir tecla Escape para salir del juego
+        this.escKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+        
         // Interfaz de usuario
         this.createUI();
         
         // Sistema de diálogos
         this.dialogSystem = this.createDialogSystem();
+        
+        // Añadir el sistema de objetivos para ganar el juego
+        this.setupObjectives();
     }
 
     createWorld() {
@@ -55,6 +61,103 @@ class Game extends Phaser.Scene {
         if (this.player && this.am) {
             this.physics.add.collider(this.player, this.am);
         }
+    }
+
+    setupObjectives() {
+        // Número de componentes necesarios para ganar
+        this.totalComponents = 5;
+        this.collectedComponents = 0;
+        
+        // Crear los componentes en el mapa
+        this.components = this.physics.add.group();
+        
+        // Posiciones de los componentes
+        const positions = [
+            { x: 100, y: 100 },
+            { x: 600, y: 150 },
+            { x: 150, y: 500 },
+            { x: 550, y: 450 },
+            { x: 350, y: 300 }
+        ];
+        
+        // Crear los componentes
+        positions.forEach(pos => {
+            // Usar un rectángulo azul como placeholder para los componentes
+            const component = this.components.create(pos.x, pos.y, 'player');
+            component.setScale(0.5);
+            component.setTint(0x00ffff); // Color cian para los componentes
+        });
+        
+        // Añadir colisión con el jugador
+        this.physics.add.overlap(this.player, this.components, this.collectComponent, null, this);
+        
+        // Texto para mostrar los componentes recolectados
+        this.componentText = this.add.text(650, 30, 'Componentes: 0/' + this.totalComponents, {
+            fontFamily: 'monospace',
+            fontSize: 14
+        }).setScrollFactor(0);
+        
+        // Añadir portal de escape (inicialmente invisible)
+        this.escapePortal = this.physics.add.sprite(400, 200, 'player');
+        this.escapePortal.setTint(0xff00ff); // Color magenta para el portal
+        this.escapePortal.setScale(1.2);
+        this.escapePortal.setVisible(false);
+        this.escapePortal.body.setEnable(false);
+        
+        // Colisión con el portal
+        this.physics.add.overlap(this.player, this.escapePortal, this.escapeFromAM, null, this);
+    }
+
+    collectComponent(player, component) {
+        // Eliminar el componente del mapa
+        component.destroy();
+        
+        // Incrementar contador
+        this.collectedComponents++;
+        
+        // Actualizar texto
+        this.componentText.setText('Componentes: ' + this.collectedComponents + '/' + this.totalComponents);
+        
+        // Mostrar mensaje
+        this.showDialog('Has encontrado un componente. (' + this.collectedComponents + '/' + this.totalComponents + ')');
+        
+        // Si se han recolectado todos los componentes, activar el portal de escape
+        if (this.collectedComponents >= this.totalComponents) {
+            this.activateEscapePortal();
+        }
+    }
+
+    activateEscapePortal() {
+        this.escapePortal.setVisible(true);
+        this.escapePortal.body.setEnable(true);
+        
+        // Añadir animación pulsante al portal
+        this.tweens.add({
+            targets: this.escapePortal,
+            scaleX: 1.4,
+            scaleY: 1.4,
+            duration: 1000,
+            yoyo: true,
+            repeat: -1
+        });
+        
+        this.showDialog('¡Has encontrado todos los componentes! El portal de escape ha sido activado.');
+    }
+
+    escapeFromAM() {
+        // Mostrar mensaje de victoria
+        this.showDialog('¡Has escapado de AM! La pesadilla ha terminado... por ahora.');
+        
+        // Detener toda actividad del juego
+        this.physics.pause();
+        
+        // Aplicar efecto de desvanecimiento a la pantalla
+        this.cameras.main.fade(3000, 0, 0, 0);
+        
+        // Después de 3 segundos, volver al menú principal
+        this.time.delayedCall(3000, () => {
+            this.scene.start('MainMenu');
+        });
     }
 
     createUI() {
@@ -97,6 +200,11 @@ class Game extends Phaser.Scene {
     }
 
     update() {
+        // Comprobar tecla Escape para volver al menú
+        if (this.escKey && this.escKey.isDown) {
+            this.scene.start('MainMenu');
+        }
+        
         // Actualizar jugador
         if (this.player) this.player.update(this.cursors);
         
