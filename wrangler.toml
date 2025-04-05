@@ -1,0 +1,10 @@
+name = "am-no-mouth-to-scream"
+type = "javascript"
+compatibility_date = "2025-04-05"
+
+[site]
+bucket = "./" # Serve files from the root directory
+entry-point = "index.html"
+
+[env.production]
+route = "your-domain.com/*" # Replace with your actual domain
