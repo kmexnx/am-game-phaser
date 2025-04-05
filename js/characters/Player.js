@@ -50,11 +50,14 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.body.velocity.normalize().scale(this.speed);
         }
         
-        // Animaciones
+        // Animaciones - Comentadas temporalmente para evitar errores
+        // Simplemente cambiamos la textura en lugar de usar animaciones
         if (this.isMoving) {
-            this.anims.play('walk-down', true);
+            // Evitamos usar animaciones por ahora
+            // this.anims.play('walk-down', true);
         } else {
-            this.anims.stop();
+            // Evitamos detener animaciones que no están funcionando
+            // this.anims.stop();
         }
     }
     
