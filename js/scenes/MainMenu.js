@@ -64,7 +64,8 @@ class MainMenu extends Phaser.Scene {
         creditsButton.on('pointerover', () => creditsButton.setColor('#ff0000'));
         creditsButton.on('pointerout', () => creditsButton.setColor('#ffffff'));
 
-        // Música de fondo inquietante
+        // Música de fondo inquietante - Comentado temporalmente
+        /* 
         if (!this.sound.get('music-theme')) {
             this.backgroundMusic = this.sound.add('music-theme', {
                 volume: 0.5,
@@ -72,5 +73,6 @@ class MainMenu extends Phaser.Scene {
             });
             this.backgroundMusic.play();
         }
+        */
     }
 }
