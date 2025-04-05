@@ -26,14 +26,14 @@ class Game extends Phaser.Scene {
         // Añadir tecla Escape para salir del juego
         this.escKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
         
-        // Interfaz de usuario (Creada antes de otros elementos para asegurar que esté en la parte superior)
+        // Añadir el sistema de objetivos para ganar el juego
+        this.setupObjectives();
+        
+        // Interfaz de usuario - Ahora creada al final para asegurarnos de que esté por encima de todo
         this.createUI();
         
         // Sistema de diálogos
         this.dialogSystem = this.createDialogSystem();
-        
-        // Añadir el sistema de objetivos para ganar el juego
-        this.setupObjectives();
         
         // Control de estado del juego
         this.gameActive = true;
@@ -94,13 +94,6 @@ class Game extends Phaser.Scene {
         // Añadir colisión con el jugador
         this.physics.add.overlap(this.player, this.components, this.collectComponent, null, this);
         
-        // Texto para mostrar los componentes recolectados
-        this.componentText = this.add.text(650, 30, 'Componentes: 0/' + this.totalComponents, {
-            fontFamily: 'monospace',
-            fontSize: 14,
-            color: '#ffffff'
-        }).setScrollFactor(0).setDepth(100);
-        
         // Añadir portal de escape (inicialmente invisible)
         this.escapePortal = this.physics.add.sprite(400, 200, 'player');
         this.escapePortal.setTint(0xff00ff); // Color magenta para el portal
@@ -120,7 +113,7 @@ class Game extends Phaser.Scene {
         this.collectedComponents++;
         
         // Actualizar texto
-        this.componentText.setText('Componentes: ' + this.collectedComponents + '/' + this.totalComponents);
+        this.componentsText.setText('COMPONENTES: ' + this.collectedComponents + '/' + this.totalComponents);
         
         // Mostrar mensaje
         this.showDialog('Has encontrado un componente. (' + this.collectedComponents + '/' + this.totalComponents + ')');
@@ -203,41 +196,71 @@ class Game extends Phaser.Scene {
     }
 
     createUI() {
-        // Crear un contenedor para la UI que siempre esté visible
-        this.uiContainer = this.add.container(0, 0).setDepth(100).setScrollFactor(0);
+        // Aseguramos que la UI esté completamente por encima de todo
+        const depth = 1000;
         
-        // Fondo para la barra de cordura para hacerla más visible
-        const sanityBarBg = this.add.rectangle(180, 30, 154, 24, 0x000000, 0.7);
-        
-        // Barra de cordura (ahora más grande y visible)
-        this.sanityBar = this.add.rectangle(180, 30, 150, 20, 0x00ff00);
-        
-        // Texto de cordura (reposicionado y más visible)
-        this.sanityText = this.add.text(180, 30, 'CORDURA', {
+        // Barra de cordura totalmente rediseñada para máxima visibilidad
+        // 1. Primero creamos un contenedor negro para el fondo
+        const barBg = this.add.rectangle(400, 50, 300, 40, 0x000000, 0.8)
+            .setScrollFactor(0)
+            .setDepth(depth);
+            
+        // 2. Borde blanco alrededor para resaltar
+        const barBorder = this.add.rectangle(400, 50, 304, 44, 0xffffff, 0.5)
+            .setScrollFactor(0)
+            .setDepth(depth);
+            
+        // 3. La barra de cordura en sí, ahora mucho más grande
+        this.sanityBar = this.add.rectangle(400, 50, 290, 30, 0x00ff00)
+            .setScrollFactor(0)
+            .setDepth(depth + 1)
+            .setOrigin(0.5, 0.5);
+            
+        // 4. Texto grande y claro para la cordura
+        this.sanityText = this.add.text(400, 50, 'CORDURA: 100%', {
             fontFamily: 'monospace',
-            fontSize: 14,
+            fontSize: 20,
+            fontStyle: 'bold',
             color: '#ffffff',
             stroke: '#000000',
-            strokeThickness: 3
-        }).setOrigin(0.5, 0.5);
-        
-        // Añadir todos los elementos al contenedor UI
-        this.uiContainer.add([sanityBarBg, this.sanityBar, this.sanityText]);
+            strokeThickness: 4
+        }).setScrollFactor(0)
+          .setDepth(depth + 2)
+          .setOrigin(0.5, 0.5);
+          
+        // Crear texto para los componentes recolectados
+        this.componentsText = this.add.text(400, 100, 'COMPONENTES: 0/' + this.totalComponents, {
+            fontFamily: 'monospace',
+            fontSize: 20,
+            fontStyle: 'bold',
+            color: '#ffffff',
+            stroke: '#000000',
+            strokeThickness: 4
+        }).setScrollFactor(0)
+          .setDepth(depth + 2)
+          .setOrigin(0.5, 0.5);
     }
 
     createDialogSystem() {
         // Crear sistema de diálogos para las interacciones con AM
-        const dialogBox = this.add.rectangle(400, 500, 700, 100, 0x000000, 0.7)
+        const dialogBox = this.add.rectangle(400, 500, 700, 100, 0x000000, 0.8)
             .setScrollFactor(0)
             .setVisible(false)
-            .setDepth(100);
+            .setDepth(2000);
         
-        const dialogText = this.add.text(70, 460, '', {
+        const dialogText = this.add.text(400, 500, '', {
             fontFamily: 'monospace',
-            fontSize: 16,
+            fontSize: 18,
+            fontStyle: 'bold',
             color: '#ffffff',
-            wordWrap: { width: 660 }
-        }).setScrollFactor(0).setVisible(false).setDepth(100);
+            stroke: '#000000',
+            strokeThickness: 4,
+            wordWrap: { width: 680 },
+            align: 'center'
+        }).setScrollFactor(0)
+          .setVisible(false)
+          .setDepth(2001)
+          .setOrigin(0.5, 0.5);
         
         return { box: dialogBox, text: dialogText, isActive: false };
     }
@@ -278,13 +301,18 @@ class Game extends Phaser.Scene {
     updateUI() {
         // Actualizar barra de cordura basada en el estado del jugador
         if (this.player) {
-            const sanityWidth = (this.player.sanity / 100) * 150;
+            // Calculamos la anchura de la barra proporcional a la cordura
+            const sanityPercentage = Math.max(0, this.player.sanity); // Asegurarnos de que no sea negativo
+            const sanityWidth = (sanityPercentage / 100) * 290;
             this.sanityBar.width = sanityWidth;
             
+            // Actualizar texto con porcentaje
+            this.sanityText.setText('CORDURA: ' + Math.floor(sanityPercentage) + '%');
+            
             // Cambiar color según el nivel de cordura
-            if (this.player.sanity < 30) {
+            if (sanityPercentage < 30) {
                 this.sanityBar.fillColor = 0xff0000; // Rojo para baja cordura
-            } else if (this.player.sanity < 60) {
+            } else if (sanityPercentage < 60) {
                 this.sanityBar.fillColor = 0xffff00; // Amarillo para cordura media
             } else {
                 this.sanityBar.fillColor = 0x00ff00; // Verde para cordura alta
