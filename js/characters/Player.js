@@ -16,8 +16,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.sanity = 100;
         this.isMoving = false;
         
-        // Efectos de sonido
-        this.screamSound = scene.sound.add('sound-scream');
+        // Efectos de sonido (comentados para evitar errores)
+        // this.screamSound = scene.sound.add('sound-scream');
     }
     
     update(cursors) {
@@ -79,7 +79,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     
     loseSanity() {
         // Perder cordura - escena de pesadilla
-        this.screamSound.play();
+        // Comentada la reproducción de sonido
+        // this.screamSound.play();
+        
         // Efecto visual de distorsión
         this.scene.cameras.main.shake(500, 0.05);
         this.scene.showDialog('AM: TE TENGO EN MI PODER AHORA...');
