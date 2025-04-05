@@ -40,7 +40,7 @@ class Game extends Phaser.Scene {
         this.gameActive = true;
         
         // Play background music - Commented until valid audio files are available
-        // this.playMusic();
+        this.playMusic();
     }
 
     createWorld() {
@@ -286,7 +286,6 @@ class Game extends Phaser.Scene {
     
     playMusic() {
         // This function is commented until we have valid audio files
-        /*
         if (!this.sound.get('music-theme')) {
             this.backgroundMusic = this.sound.add('music-theme', {
                 volume: 0.5,
@@ -294,7 +293,6 @@ class Game extends Phaser.Scene {
             });
             this.backgroundMusic.play();
         }
-        */
     }
 
     update() {

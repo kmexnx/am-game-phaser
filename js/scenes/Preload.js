@@ -35,7 +35,7 @@ class Preload extends Phaser.Scene {
         this.load.spritesheet('player-walk', 'assets/images/player-walk.png', { frameWidth: 48, frameHeight: 64 });
         
         // Audio - Comentado temporalmente para evitar errores
-        // this.load.audio('music-theme', 'assets/audio/theme.mp3');
+        this.load.audio('music-theme', 'assets/audio/theme.wav');
         // this.load.audio('sound-scream', 'assets/audio/scream.mp3');
         
         // Mapas
