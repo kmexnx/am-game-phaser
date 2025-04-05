@@ -70,9 +70,12 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     
     reduceSanity(amount) {
         this.sanity -= amount;
+        // Comprobamos si la cordura ha llegado a 0
         if (this.sanity <= 0) {
             this.loseSanity();
+            return true; // Indica que el jugador ha perdido toda la cordura
         }
+        return false; // La cordura sigue por encima de 0
     }
     
     die() {
@@ -88,5 +91,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         // Efecto visual de distorsión
         this.scene.cameras.main.shake(500, 0.05);
         this.scene.showDialog('AM: TE TENGO EN MI PODER AHORA...');
+        
+        // La escena Game se encargará de manejar la derrota
     }
 }
