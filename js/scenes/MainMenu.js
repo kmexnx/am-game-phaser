@@ -4,11 +4,11 @@ class MainMenu extends Phaser.Scene {
     }
 
     create() {
-        // Fondo con estilo Burton
+        // Dark background
         this.add.image(400, 300, 'title-background');
 
-        // Título del juego con estilo gótico
-        const title = this.add.text(400, 100, 'NO PUEDO GRITAR', {
+        // Game title with gothic style
+        const title = this.add.text(400, 100, 'NO MOUTH TO SCREAM', {
             fontFamily: 'monospace',
             fontSize: 48,
             color: '#ff0000',
@@ -17,7 +17,7 @@ class MainMenu extends Phaser.Scene {
             strokeThickness: 6
         }).setOrigin(0.5);
         
-        // Añadir efecto de ondulación al título
+        // Add ripple effect to title
         this.tweens.add({
             targets: title,
             scaleX: 1.05,
@@ -27,11 +27,11 @@ class MainMenu extends Phaser.Scene {
             repeat: -1
         });
 
-        // Explicación del juego
+        // Game explanation
         const storyText = this.add.text(400, 180, 
-            'AM, la supercomputadora, te ha atrapado en su mundo virtual.\n' +
-            'Encuentra 5 componentes para construir un terminal de escape.\n' +
-            'Mantén tu cordura mientras evitas a AM.', {
+            'AM, the supercomputer, has trapped you in its virtual world.\n' +
+            'Find 5 components to build an escape terminal.\n' +
+            'Maintain your sanity while avoiding AM.', {
             fontFamily: 'monospace',
             fontSize: 14,
             color: '#ffffff',
@@ -39,26 +39,26 @@ class MainMenu extends Phaser.Scene {
             wordWrap: { width: 600 }
         }).setOrigin(0.5);
 
-        // Botones de menú con estilo Burton
-        const startButton = this.add.text(400, 280, 'Iniciar Juego', {
+        // Menu buttons
+        const startButton = this.add.text(400, 280, 'Start Game', {
             fontFamily: 'monospace',
             fontSize: 24,
             color: '#ffffff'
         }).setOrigin(0.5).setInteractive({ useHandCursor: true });
 
-        const controlsButton = this.add.text(400, 330, 'Controles', {
+        const controlsButton = this.add.text(400, 330, 'Controls', {
             fontFamily: 'monospace',
             fontSize: 24,
             color: '#ffffff'
         }).setOrigin(0.5).setInteractive({ useHandCursor: true });
 
-        const creditsButton = this.add.text(400, 380, 'Créditos', {
+        const creditsButton = this.add.text(400, 380, 'Credits', {
             fontFamily: 'monospace',
             fontSize: 24,
             color: '#ffffff'
         }).setOrigin(0.5).setInteractive({ useHandCursor: true });
 
-        // Interacción con los botones
+        // Button interactions
         startButton.on('pointerover', () => {
             startButton.setColor('#ff0000');
         });
@@ -69,7 +69,7 @@ class MainMenu extends Phaser.Scene {
             this.scene.start('Game');
         });
 
-        // Similar para los otros botones
+        // Similar for other buttons
         controlsButton.on('pointerover', () => controlsButton.setColor('#ff0000'));
         controlsButton.on('pointerout', () => controlsButton.setColor('#ffffff'));
         controlsButton.on('pointerdown', () => this.showControls());
@@ -78,10 +78,10 @@ class MainMenu extends Phaser.Scene {
         creditsButton.on('pointerout', () => creditsButton.setColor('#ffffff'));
         creditsButton.on('pointerdown', () => this.showCredits());
 
-        // La música está comentada por ahora para evitar errores
+        // Music is commented out for now to avoid errors
         // this.playMusic();
         
-        // Crear sistema de diálogos para información
+        // Create dialog system for information
         this.infoBox = this.add.rectangle(400, 300, 600, 350, 0x000000, 0.9)
             .setVisible(false);
         
@@ -104,7 +104,7 @@ class MainMenu extends Phaser.Scene {
     }
     
     playMusic() {
-        // Comentado para evitar errores con archivos de audio
+        // Commented to avoid errors with audio files
         /*
         if (!this.sound.get('music-theme')) {
             this.backgroundMusic = this.sound.add('music-theme', {
@@ -118,25 +118,24 @@ class MainMenu extends Phaser.Scene {
     
     showControls() {
         const controlsText = 
-            'CONTROLES\n\n' +
-            'Flechas: Mover al personaje\n' +
-            'ESC: Volver al menú principal\n\n' +
-            'OBJETIVO\n\n' +
-            'Recoge los 5 componentes para activar el portal de escape.\n' +
-            'Evita a AM, acercarte a él reducirá tu cordura.\n' +
-            'Si tu cordura llega a 0, perderás el control.';
+            'CONTROLS\n\n' +
+            'Arrow Keys: Move character\n' +
+            'ESC: Return to main menu\n\n' +
+            'OBJECTIVE\n\n' +
+            'Collect 5 components to activate the escape portal.\n' +
+            'Avoid AM, getting close will reduce your sanity.\n' +
+            'If your sanity reaches 0, you will lose control.';
             
         this.showInfo(controlsText);
     }
     
     showCredits() {
         const creditsText = 
-            'CRÉDITOS\n\n' +
-            'Basado en "I Have No Mouth, and I Must Scream"\n' +
-            'de Harlan Ellison\n\n' +
-            'Desarrollado con Phaser 3\n' +
-            'Estilo visual inspirado en Tim Burton\n\n' +
-            '© 2025 - Todos los derechos reservados';
+            'CREDITS\n\n' +
+            'Based on "I Have No Mouth, and I Must Scream"\n' +
+            'by Harlan Ellison\n\n' +
+            'Developed with Phaser 3\n\n' +
+            '© 2025 - All rights reserved';
             
         this.showInfo(creditsText);
     }
