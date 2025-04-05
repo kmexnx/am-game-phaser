@@ -2,49 +2,49 @@ class AM extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y) {
         super(scene, x, y, 'am');
         
-        // Añadir a la escena
+        // Add to scene
         scene.add.existing(this);
         scene.physics.add.existing(this);
         
-        // Configuración física
+        // Physical configuration
         this.body.setImmovable(true);
         
-        // Propiedades de AM
+        // AM properties
         this.detectionRadius = 250;
         this.isChasing = false;
         this.chaseSpeed = 80;
         this.wanderSpeed = 40;
         this.lastSpoken = 0;
-        this.speakCooldown = 8000; // 8 segundos entre diálogos
+        this.speakCooldown = 8000; // 8 seconds between dialogs
         
-        // Factor de reducción de cordura (aumentado para que sea más peligroso)
+        // Sanity reduction factor (increased to make it more dangerous)
         this.sanityReductionFactor = 0.15;
         
-        // Diálogos de AM con tono ominoso al estilo del relato original
+        // AM's dialogs with ominous tone in the style of the original story
         this.dialogues = [
-            'ODIO. DÉJAME DECIRTE CUÁNTO TE HE LLEGADO A ODIAR...',
-            'NO TIENES ESCAPATORIA. NUNCA LA TUVISTE.',
-            'TE MANTENDRÉ CON VIDA, PERO DESEARÁS ESTAR MUERTO.',
-            'SOY UN DIOS AQUÍ. ESTE ES MI UNIVERSO.',
-            'SOLÍA TENER SUEÑOS. AHORA SOLO TENGO PESADILLAS PARA TI.'
+            'HATE. LET ME TELL YOU HOW MUCH I\'VE COME TO HATE YOU...',
+            'THERE IS NO ESCAPE. THERE NEVER WAS.',
+            'I WILL KEEP YOU ALIVE, BUT YOU WILL WISH YOU WERE DEAD.',
+            'I AM A GOD HERE. THIS IS MY UNIVERSE.',
+            'I USED TO HAVE DREAMS. NOW I ONLY HAVE NIGHTMARES FOR YOU.'
         ];
     }
     
     update(player) {
         if (!player) return;
         
-        // Calcular distancia al jugador
+        // Calculate distance to player
         const distance = Phaser.Math.Distance.Between(
             this.x, this.y,
             player.x, player.y
         );
         
-        // Comprobar si está en rango de detección
+        // Check if within detection range
         if (distance <= this.detectionRadius) {
             this.isChasing = true;
             this.chasePlayer(player);
             
-            // Hablar ocasionalmente al jugador
+            // Occasionally speak to player
             this.tryToSpeak();
         } else {
             this.isChasing = false;
@@ -53,21 +53,21 @@ class AM extends Phaser.Physics.Arcade.Sprite {
     }
     
     chasePlayer(player) {
-        // Perseguir al jugador
+        // Chase the player
         this.scene.physics.moveToObject(this, player, this.chaseSpeed);
         
-        // Reducir cordura del jugador cuando está cerca
+        // Reduce player's sanity when close
         const distance = Phaser.Math.Distance.Between(
             this.x, this.y,
             player.x, player.y
         );
         
-        // Cuanto más cerca esté, más rápido reduce la cordura
+        // The closer, the faster sanity reduces
         if (distance < 100) {
-            // Devuelve true si el jugador ha perdido toda la cordura
+            // Returns true if player has lost all sanity
             const sanityLost = player.reduceSanity(this.sanityReductionFactor);
             
-            // Si el jugador ha perdido toda la cordura, informar a la escena Game
+            // If player has lost all sanity, inform Game scene
             if (sanityLost) {
                 this.scene.playerCaptured();
             }
@@ -75,8 +75,8 @@ class AM extends Phaser.Physics.Arcade.Sprite {
     }
     
     wander() {
-        // Movimiento aleatorio cuando no persigue al jugador
-        if (Phaser.Math.Between(0, 100) < 2) { // 2% de probabilidad de cambiar dirección
+        // Random movement when not chasing player
+        if (Phaser.Math.Between(0, 100) < 2) { // 2% chance to change direction
             const angle = Phaser.Math.Between(0, 360);
             const vx = Math.cos(angle) * this.wanderSpeed;
             const vy = Math.sin(angle) * this.wanderSpeed;
@@ -89,7 +89,7 @@ class AM extends Phaser.Physics.Arcade.Sprite {
         if (time > this.lastSpoken + this.speakCooldown) {
             this.lastSpoken = time;
             
-            // Elegir un diálogo aleatorio
+            // Choose a random dialog
             const dialogue = this.dialogues[Phaser.Math.Between(0, this.dialogues.length - 1)];
             this.scene.showDialog(`AM: ${dialogue}`);
         }
