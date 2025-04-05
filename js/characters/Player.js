@@ -2,30 +2,30 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y) {
         super(scene, x, y, 'player');
         
-        // Añadir a la escena
+        // Add to scene
         scene.add.existing(this);
         scene.physics.add.existing(this);
         
-        // Configuración física
+        // Physical configuration
         this.setCollideWorldBounds(true);
         this.body.setSize(32, 48);
         
-        // Propiedades del jugador
+        // Player properties
         this.speed = 150;
         this.health = 100;
         this.sanity = 100;
         this.isMoving = false;
         
-        // Efectos de sonido (comentados para evitar errores)
+        // Sound effects (commented to avoid errors)
         // this.screamSound = scene.sound.add('sound-scream');
     }
     
     update(cursors) {
-        // Reiniciar velocidad
+        // Reset velocity
         this.body.setVelocity(0);
         this.isMoving = false;
         
-        // Movimiento horizontal
+        // Horizontal movement
         if (cursors.left.isDown) {
             this.body.setVelocityX(-this.speed);
             this.isMoving = true;
@@ -36,7 +36,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             if (this.flipX !== false) this.setFlipX(false);
         }
         
-        // Movimiento vertical
+        // Vertical movement
         if (cursors.up.isDown) {
             this.body.setVelocityY(-this.speed);
             this.isMoving = true;
@@ -45,18 +45,18 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.isMoving = true;
         }
         
-        // Normalizar velocidad diagonal
+        // Normalize diagonal velocity
         if (this.body.velocity.x !== 0 && this.body.velocity.y !== 0) {
             this.body.velocity.normalize().scale(this.speed);
         }
         
-        // Animaciones - Comentadas temporalmente para evitar errores
-        // Simplemente cambiamos la textura en lugar de usar animaciones
+        // Animations - Commented temporarily to avoid errors
+        // We simply change the texture instead of using animations
         if (this.isMoving) {
-            // Evitamos usar animaciones por ahora
+            // Avoid using animations for now
             // this.anims.play('walk-down', true);
         } else {
-            // Evitamos detener animaciones que no están funcionando
+            // Avoid stopping animations that aren't working
             // this.anims.stop();
         }
     }
@@ -70,28 +70,28 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     
     reduceSanity(amount) {
         this.sanity -= amount;
-        // Comprobamos si la cordura ha llegado a 0
+        // Check if sanity has reached 0
         if (this.sanity <= 0) {
             this.loseSanity();
-            return true; // Indica que el jugador ha perdido toda la cordura
+            return true; // Indicates player has lost all sanity
         }
-        return false; // La cordura sigue por encima de 0
+        return false; // Sanity still above 0
     }
     
     die() {
-        // Lógica de muerte del jugador
+        // Player death logic
         this.scene.scene.restart();
     }
     
     loseSanity() {
-        // Perder cordura - escena de pesadilla
-        // Comentada la reproducción de sonido
+        // Lose sanity - nightmare scene
+        // Sound playback commented
         // this.screamSound.play();
         
-        // Efecto visual de distorsión
+        // Visual distortion effect
         this.scene.cameras.main.shake(500, 0.05);
-        this.scene.showDialog('AM: TE TENGO EN MI PODER AHORA...');
+        this.scene.showDialog('AM: I HAVE YOU NOW...');
         
-        // La escena Game se encargará de manejar la derrota
+        // Game scene will handle defeat
     }
 }
