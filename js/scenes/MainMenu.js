@@ -78,16 +78,8 @@ class MainMenu extends Phaser.Scene {
         creditsButton.on('pointerout', () => creditsButton.setColor('#ffffff'));
         creditsButton.on('pointerdown', () => this.showCredits());
 
-        // Música de fondo inquietante - Comentado temporalmente
-        /* 
-        if (!this.sound.get('music-theme')) {
-            this.backgroundMusic = this.sound.add('music-theme', {
-                volume: 0.5,
-                loop: true
-            });
-            this.backgroundMusic.play();
-        }
-        */
+        // La música está comentada por ahora para evitar errores
+        // this.playMusic();
         
         // Crear sistema de diálogos para información
         this.infoBox = this.add.rectangle(400, 300, 600, 350, 0x000000, 0.9)
@@ -109,6 +101,19 @@ class MainMenu extends Phaser.Scene {
         .setInteractive({ useHandCursor: true })
         .on('pointerdown', () => this.hideInfo())
         .setVisible(false);
+    }
+    
+    playMusic() {
+        // Comentado para evitar errores con archivos de audio
+        /*
+        if (!this.sound.get('music-theme')) {
+            this.backgroundMusic = this.sound.add('music-theme', {
+                volume: 0.5,
+                loop: true
+            });
+            this.backgroundMusic.play();
+        }
+        */
     }
     
     showControls() {
