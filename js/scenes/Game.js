@@ -13,6 +13,9 @@ class Game extends Phaser.Scene {
         // Crear a AM (el antagonista)
         this.am = new AM(this, 200, 200);
         
+        // Añadir colisiones después de crear el jugador
+        this.setupCollisions();
+        
         // Configurar cámara
         this.cameras.main.startFollow(this.player);
         this.cameras.main.setZoom(1.2);
@@ -37,9 +40,21 @@ class Game extends Phaser.Scene {
         this.groundLayer = this.map.createLayer('Ground', tileset);
         this.wallsLayer = this.map.createLayer('Walls', wallTileset);
         
-        // Configurar colisiones
-        this.wallsLayer.setCollisionByProperty({ collides: true });
-        this.physics.add.collider(this.player, this.wallsLayer);
+        // En lugar de usar propiedades, definimos directamente qué tiles colisionan
+        // Todos los tiles no vacíos en la capa de paredes colisionarán
+        this.wallsLayer.setCollisionByExclusion([-1]);
+    }
+
+    setupCollisions() {
+        // Configurar colisiones entre jugador y paredes
+        if (this.player && this.wallsLayer) {
+            this.physics.add.collider(this.player, this.wallsLayer);
+        }
+        
+        // Configurar colisiones entre personajes
+        if (this.player && this.am) {
+            this.physics.add.collider(this.player, this.am);
+        }
     }
 
     createUI() {
