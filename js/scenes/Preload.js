@@ -31,8 +31,8 @@ class Preload extends Phaser.Scene {
         this.load.image('tile-floor', 'assets/images/tile-floor.png');
         this.load.image('tile-wall', 'assets/images/tile-wall.png');
         
-        // Spritesheets
-        this.load.spritesheet('player-walk', 'assets/images/player-walk.png', { frameWidth: 48, frameHeight: 64 });
+        // Spritesheets - Comentado temporalmente para evitar errores
+        // this.load.spritesheet('player-walk', 'assets/images/player-walk.png', { frameWidth: 48, frameHeight: 64 });
         
         // Audio - Comentado temporalmente para evitar errores
         // this.load.audio('music-theme', 'assets/audio/theme.mp3');
@@ -43,13 +43,15 @@ class Preload extends Phaser.Scene {
     }
 
     create() {
-        // Animaciones del jugador
+        // Animaciones del jugador - Comentado temporalmente para evitar errores
+        /*
         this.anims.create({
             key: 'walk-down',
             frames: this.anims.generateFrameNumbers('player-walk', { start: 0, end: 3 }),
             frameRate: 8,
             repeat: -1
         });
+        */
 
         // Iniciar pantalla de título
         this.scene.start('MainMenu');
