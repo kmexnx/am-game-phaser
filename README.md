@@ -1,42 +1,51 @@
-# AM: No Puedo Gritar
+# AM: No Mouth to Scream
 
-Un videojuego inspirado en el relato "I Have No Mouth, and I Must Scream" de Harlan Ellison, con una estética visual inspirada en el estilo de Tim Burton. Desarrollado con Phaser 3.
+A video game inspired by the short story "I Have No Mouth, and I Must Scream" by Harlan Ellison, developed with Phaser 3.
 
-## Concepto
+## Concept
 
-Este juego captura la esencia del horror existencial del relato original, donde los personajes son atormentados por una inteligencia artificial vengativa llamada AM. La estética visual al estilo Burton añade un toque gótico y surrealista que complementa perfectamente la atmósfera opresiva de la historia.
+This game captures the essence of existential horror from the original story, where characters are tormented by a vengeful AI called AM. The dark and surreal visual style complements the oppressive atmosphere of the story.
 
-## Instalación
+## Installation
 
-1. Clona este repositorio
-2. Abre index.html en un servidor web local
+1. Clone this repository
+2. Open index.html in a local web server
 
-## Controles
+## Controls
 
-- Flechas: Mover al personaje
-- Espacio: Interactuar / Confirmar
+- Arrow keys: Move the character
+- ESC: Return to main menu
 
-## Características
+## Features
 
-- Atmósfera inquietante con influencias del trabajo de Tim Burton
-- Sistema de cordura que afecta la percepción del jugador
-- Persecución por parte de AM, una entidad implacable
-- Puzzles y desafíos para escapar de las trampas de AM
+- Disturbing atmosphere with gothic influences
+- Sanity system that affects player perception
+- Being pursued by AM, a relentless entity
+- Puzzles and challenges to escape AM's traps
 
-## Estructura del proyecto
+## Project Structure
 
 ```
-├── assets/          # Recursos gráficos y sonoros
-├── css/             # Estilos CSS
-├── js/              # Código JavaScript
-│   ├── characters/  # Clases de personajes
-│   └── scenes/      # Escenas del juego
-└── index.html       # Archivo principal
+├── assets/          # Graphic and audio resources
+├── css/             # CSS styles
+├── js/              # JavaScript code
+│   ├── characters/  # Character classes
+│   └── scenes/      # Game scenes
+└── index.html       # Main file
 ```
 
-## Pendiente
+## Game Objective
 
-- Añadir assets gráficos con estilo Burton
-- Implementar niveles adicionales
-- Añadir efectos visuales de distorsión
-- Completar sistema de puzzles
+In this game, you play as a human trapped in AM's digital world. Your objective is to find 5 components scattered throughout the map to activate an escape portal while maintaining your sanity. AM will constantly pursue you, and staying close to it will reduce your sanity. If your sanity reaches zero, you'll be captured by AM with no escape.
+
+## Upcoming Features
+
+- Add detailed graphic assets
+- Implement additional levels
+- Add visual distortion effects
+- Complete puzzle system
+
+## Credits
+
+Based on "I Have No Mouth, and I Must Scream" by Harlan Ellison.
+Developed with Phaser 3 Game Framework.
