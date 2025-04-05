@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 64">
+  <!-- Este es un sprite sheet con 3 frames de animación de caminar, cada uno de 64x64 pixeles -->
+  
+  <!-- FRAME 1 - Posición inicial -->
+  <!-- Cabeza -->
+  <rect x="26" y="8" width="12" height="12" fill="#333333"/>
+  
+  <!-- Rostro - ojos -->
+  <rect x="28" y="12" width="2" height="2" fill="#cccccc"/>
+  <rect x="34" y="12" width="2" height="2" fill="#cccccc"/>
+  
+  <!-- Boca - expresión angustiada -->
+  <rect x="30" y="16" width="4" height="1" fill="#660000"/>
+  
+  <!-- Torso -->
+  <rect x="24" y="20" width="16" height="14" fill="#551111"/>
+  
+  <!-- Detalles del torso -->
+  <rect x="24" y="24" width="16" height="2" fill="#440000"/>
+  <rect x="28" y="20" width="1" height="8" fill="#330000"/>
+  <rect x="35" y="20" width="1" height="14" fill="#330000"/>
+  
+  <!-- Brazos - posición neutral para caminar -->
+  <rect x="20" y="20" width="4" height="12" fill="#551111"/>
+  <rect x="40" y="20" width="4" height="12" fill="#551111"/>
+  
+  <!-- Piernas - posición neutral -->
+  <rect x="26" y="34" width="4" height="16" fill="#222222"/>
+  <rect x="34" y="34" width="4" height="16" fill="#222222"/>
+  
+  <!-- Detalles de sombras para darle dimensión -->
+  <rect x="40" y="26" width="4" height="6" fill="#440000"/>
+  <rect x="20" y="26" width="4" height="6" fill="#440000"/>
+  
+  <!-- Cicatrices o modificaciones -->
+  <rect x="30" y="10" width="4" height="1" fill="#990000"/>
+  <rect x="32" y="22" width="2" height="6" fill="#990000"/>
+  
+  <!-- Pequeño dispositivo o arma -->
+  <rect x="18" y="28" width="2" height="6" fill="#444444"/>
+  <rect x="17" y="30" width="1" height="4" fill="#222222"/>
+  <rect x="19" y="30" width="1" height="1" fill="#990000"/>
+  
+  
+  <!-- FRAME 2 - Pierna izquierda adelante, pierna derecha atrás -->
+  <!-- Cabeza -->
+  <rect x="90" y="8" width="12" height="12" fill="#333333"/>
+  
+  <!-- Rostro - ojos -->
+  <rect x="92" y="12" width="2" height="2" fill="#cccccc"/>
+  <rect x="98" y="12" width="2" height="2" fill="#cccccc"/>
+  
+  <!-- Boca - expresión angustiada -->
+  <rect x="94" y="16" width="4" height="1" fill="#660000"/>
+  
+  <!-- Torso - ligeramente inclinado -->
+  <rect x="88" y="20" width="16" height="14" fill="#551111"/>
+  
+  <!-- Detalles del torso -->
+  <rect x="88" y="24" width="16" height="2" fill="#440000"/>
+  <rect x="92" y="20" width="1" height="8" fill="#330000"/>
+  <rect x="99" y="20" width="1" height="14" fill="#330000"/>
+  
+  <!-- Brazos - en movimiento -->
+  <rect x="86" y="20" width="4" height="12" fill="#551111"/>
+  <rect x="102" y="22" width="4" height="12" fill="#551111"/>
+  
+  <!-- Piernas - en movimiento -->
+  <!-- Pierna izquierda adelante -->
+  <rect x="92" y="34" width="4" height="16" fill="#222222" transform="rotate(15, 94, 34)"/>
+  <!-- Pierna derecha atrás -->
+  <rect x="96" y="34" width="4" height="16" fill="#222222" transform="rotate(-15, 98, 34)"/>
+  
+  <!-- Detalles de sombras para darle dimensión -->
+  <rect x="102" y="28" width="4" height="6" fill="#440000"/>
+  <rect x="86" y="26" width="4" height="6" fill="#440000"/>
+  
+  <!-- Cicatrices o modificaciones -->
+  <rect x="94" y="10" width="4" height="1" fill="#990000"/>
+  <rect x="96" y="22" width="2" height="6" fill="#990000"/>
+  
+  <!-- Pequeño dispositivo o arma -->
+  <rect x="84" y="26" width="2" height="6" fill="#444444"/>
+  <rect x="83" y="28" width="1" height="4" fill="#222222"/>
+  <rect x="85" y="28" width="1" height="1" fill="#990000"/>
+  
+  
+  <!-- FRAME 3 - Pierna derecha adelante, pierna izquierda atrás -->
+  <!-- Cabeza -->
+  <rect x="154" y="8" width="12" height="12" fill="#333333"/>
+  
+  <!-- Rostro - ojos -->
+  <rect x="156" y="12" width="2" height="2" fill="#cccccc"/>
+  <rect x="162" y="12" width="2" height="2" fill="#cccccc"/>
+  
+  <!-- Boca - expresión angustiada -->
+  <rect x="158" y="16" width="4" height="1" fill="#660000"/>
+  
+  <!-- Torso - ligeramente inclinado hacia el otro lado -->
+  <rect x="152" y="20" width="16" height="14" fill="#551111"/>
+  
+  <!-- Detalles del torso -->
+  <rect x="152" y="24" width="16" height="2" fill="#440000"/>
+  <rect x="156" y="20" width="1" height="8" fill="#330000"/>
+  <rect x="163" y="20" width="1" height="14" fill="#330000"/>
+  
+  <!-- Brazos - en movimiento inverso -->
+  <rect x="148" y="22" width="4" height="12" fill="#551111"/>
+  <rect x="168" y="20" width="4" height="12" fill="#551111"/>
+  
+  <!-- Piernas - en movimiento inverso -->
+  <!-- Pierna izquierda atrás -->
+  <rect x="154" y="34" width="4" height="16" fill="#222222" transform="rotate(-15, 156, 34)"/>
+  <!-- Pierna derecha adelante -->
+  <rect x="160" y="34" width="4" height="16" fill="#222222" transform="rotate(15, 162, 34)"/>
+  
+  <!-- Detalles de sombras para darle dimensión -->
+  <rect x="168" y="26" width="4" height="6" fill="#440000"/>
+  <rect x="148" y="28" width="4" height="6" fill="#440000"/>
+  
+  <!-- Cicatrices o modificaciones -->
+  <rect x="158" y="10" width="4" height="1" fill="#990000"/>
+  <rect x="160" y="22" width="2" height="6" fill="#990000"/>
+  
+  <!-- Pequeño dispositivo o arma -->
+  <rect x="170" y="26" width="2" height="6" fill="#444444"/>
+  <rect x="169" y="28" width="1" height="4" fill="#222222"/>
+  <rect x="171" y="28" width="1" height="1" fill="#990000"/>
+  
+  <!-- Elementos de parpadeo ocasional para darle vida, en cada frame -->
+  <!-- Frame 1 -->
+  <rect x="28" y="12" width="2" height="2" fill="#cccccc">
+    <animate attributeName="fill" values="#cccccc;#cccccc;#cccccc;#cccccc;#cccccc;#333333;#cccccc" dur="5s" repeatCount="indefinite"/>
+  </rect>
+  <!-- Frame 2 -->
+  <rect x="92" y="12" width="2" height="2" fill="#cccccc">
+    <animate attributeName="fill" values="#cccccc;#cccccc;#cccccc;#cccccc;#cccccc;#333333;#cccccc" dur="5s" repeatCount="indefinite"/>
+  </rect>
+  <!-- Frame 3 -->
+  <rect x="156" y="12" width="2" height="2" fill="#cccccc">
+    <animate attributeName="fill" values="#cccccc;#cccccc;#cccccc;#cccccc;#cccccc;#333333;#cccccc" dur="5s" repeatCount="indefinite"/>
+  </rect>
+  
+  <!-- Detalles de circuitos/implantes parpadeantes en cada frame -->
+  <!-- Frame 1 -->
+  <rect x="36" y="14" width="2" height="1" fill="#006600">
+    <animate attributeName="fill" values="#003300;#00ff00;#003300" dur="3s" repeatCount="indefinite"/>
+  </rect>
+  <!-- Frame 2 -->
+  <rect x="100" y="14" width="2" height="1" fill="#006600">
+    <animate attributeName="fill" values="#003300;#00ff00;#003300" dur="3s" repeatCount="indefinite"/>
+  </rect>
+  <!-- Frame 3 -->
+  <rect x="164" y="14" width="2" height="1" fill="#006600">
+    <animate attributeName="fill" values="#003300;#00ff00;#003300" dur="3s" repeatCount="indefinite"/>
+  </rect>
+</svg>

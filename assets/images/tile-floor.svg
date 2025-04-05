@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Fondo base para el tile -->
+  <rect width="64" height="64" fill="#111111"/>
+  
+  <!-- Cuadrícula principal - estilo metálico oscuro -->
+  <rect x="0" y="0" width="64" height="64" fill="#111111" stroke="#222222" stroke-width="1"/>
+  
+  <!-- División en 4 baldosas principales -->
+  <line x1="0" y1="32" x2="64" y2="32" stroke="#222222" stroke-width="1"/>
+  <line x1="32" y1="0" x2="32" y2="64" stroke="#222222" stroke-width="1"/>
+  
+  <!-- Subdivisiones para dar más detalle -->
+  <line x1="0" y1="16" x2="64" y2="16" stroke="#1a1a1a" stroke-width="1"/>
+  <line x1="0" y1="48" x2="64" y2="48" stroke="#1a1a1a" stroke-width="1"/>
+  <line x1="16" y1="0" x2="16" y2="64" stroke="#1a1a1a" stroke-width="1"/>
+  <line x1="48" y1="0" x2="48" y2="64" stroke="#1a1a1a" stroke-width="1"/>
+  
+  <!-- Detalles de cada baldosa para dar textura -->
+  
+  <!-- Cuadrante superior izquierdo -->
+  <rect x="4" y="4" width="24" height="24" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+  <rect x="8" y="8" width="16" height="16" fill="none" stroke="#151515" stroke-width="1"/>
+  
+  <!-- Cuadrante superior derecho -->
+  <rect x="36" y="4" width="24" height="24" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+  <rect x="40" y="8" width="16" height="16" fill="none" stroke="#151515" stroke-width="1"/>
+  
+  <!-- Cuadrante inferior izquierdo -->
+  <rect x="4" y="36" width="24" height="24" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+  <rect x="8" y="40" width="16" height="16" fill="none" stroke="#151515" stroke-width="1"/>
+  
+  <!-- Cuadrante inferior derecho -->
+  <rect x="36" y="36" width="24" height="24" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+  <rect x="40" y="40" width="16" height="16" fill="none" stroke="#151515" stroke-width="1"/>
+  
+  <!-- Pequeños detalles góticos en los centros -->
+  
+  <!-- Símbolos en cada cuadrante -->
+  <path d="M14 14 L18 14 L16 10 Z" fill="#440000" stroke="#550000" stroke-width="0.5"/>
+  <path d="M46 14 L50 14 L48 10 Z" fill="#440000" stroke="#550000" stroke-width="0.5"/>
+  <path d="M14 46 L18 46 L16 42 Z" fill="#440000" stroke="#550000" stroke-width="0.5"/>
+  <path d="M46 46 L50 46 L48 42 Z" fill="#440000" stroke="#550000" stroke-width="0.5"/>
+  
+  <!-- Detalles de circuitos o cables (sutiles) -->
+  <line x1="0" y1="24" x2="64" y2="24" stroke="#1d1d1d" stroke-width="0.5" stroke-dasharray="2,2"/>
+  <line x1="0" y1="40" x2="64" y2="40" stroke="#1d1d1d" stroke-width="0.5" stroke-dasharray="2,2"/>
+  <line x1="24" y1="0" x2="24" y2="64" stroke="#1d1d1d" stroke-width="0.5" stroke-dasharray="2,2"/>
+  <line x1="40" y1="0" x2="40" y2="64" stroke="#1d1d1d" stroke-width="0.5" stroke-dasharray="2,2"/>
+  
+  <!-- Pequeñas manchas o desgaste para dar aspecto usado y tétrico -->
+  <rect x="3" y="20" width="2" height="2" fill="#0a0a0a"/>
+  <rect x="22" y="5" width="3" height="1" fill="#0a0a0a"/>
+  <rect x="43" y="28" width="2" height="3" fill="#0a0a0a"/>
+  <rect x="59" y="46" width="2" height="2" fill="#0a0a0a"/>
+  <rect x="12" y="56" width="3" height="2" fill="#0a0a0a"/>
+  
+  <!-- Pequeñas manchas rojizas como sangre seca -->
+  <rect x="6" y="25" width="2" height="1" fill="#330000" opacity="0.7"/>
+  <rect x="55" y="18" width="1" height="2" fill="#330000" opacity="0.7"/>
+  <rect x="30" y="52" width="2" height="1" fill="#330000" opacity="0.7"/>
+  <rect x="37" y="9" width="1" height="1" fill="#330000" opacity="0.7"/>
+  
+  <!-- Pequeño detalle de cable/circuito que parpadea ocasionalmente -->
+  <rect x="32" y="32" width="1" height="1" fill="#550000">
+    <animate attributeName="fill" values="#330000;#770000;#330000" dur="5s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="16" y="16" width="1" height="1" fill="#550000">
+    <animate attributeName="fill" values="#330000;#770000;#330000" dur="7s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="48" y="48" width="1" height="1" fill="#550000">
+    <animate attributeName="fill" values="#330000;#770000;#330000" dur="6s" repeatCount="indefinite"/>
+  </rect>
+</svg>

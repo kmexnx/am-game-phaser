@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Fondo base de la pared -->
+  <rect width="64" height="64" fill="#222222"/>
+  
+  <!-- Estructura de paneles metálicos -->
+  <!-- Panel grande central -->
+  <rect x="8" y="4" width="48" height="56" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1"/>
+  
+  <!-- Subdivisiones de los paneles -->
+  <line x1="8" y1="32" x2="56" y2="32" stroke="#2a2a2a" stroke-width="1"/>
+  <line x1="32" y1="4" x2="32" y2="60" stroke="#2a2a2a" stroke-width="1"/>
+  
+  <!-- Remaches/tornillos en las esquinas -->
+  <circle cx="10" cy="6" r="1.5" fill="#333333" stroke="#444444" stroke-width="0.5"/>
+  <circle cx="54" cy="6" r="1.5" fill="#333333" stroke="#444444" stroke-width="0.5"/>
+  <circle cx="10" cy="58" r="1.5" fill="#333333" stroke="#444444" stroke-width="0.5"/>
+  <circle cx="54" cy="58" r="1.5" fill="#333333" stroke="#444444" stroke-width="0.5"/>
+  <circle cx="10" cy="32" r="1.5" fill="#333333" stroke="#444444" stroke-width="0.5"/>
+  <circle cx="54" cy="32" r="1.5" fill="#333333" stroke="#444444" stroke-width="0.5"/>
+  <circle cx="32" cy="6" r="1.5" fill="#333333" stroke="#444444" stroke-width="0.5"/>
+  <circle cx="32" cy="58" r="1.5" fill="#333333" stroke="#444444" stroke-width="0.5"/>
+  <circle cx="32" cy="32" r="1.5" fill="#333333" stroke="#444444" stroke-width="0.5"/>
+  
+  <!-- Detalles de las secciones -->
+  <!-- Sección superior izquierda -->
+  <rect x="12" y="8" width="16" height="20" fill="#151515" stroke="#202020" stroke-width="0.5"/>
+  <!-- Líneas de circuitos -->
+  <path d="M12 18 H28 M17 8 V28 M22 8 V28" stroke="#202020" stroke-width="0.5" stroke-dasharray="1,1"/>
+  
+  <!-- Sección superior derecha - panel de control -->
+  <rect x="36" y="8" width="16" height="20" fill="#151515" stroke="#202020" stroke-width="0.5"/>
+  <!-- Detalles del panel de control -->
+  <rect x="38" y="10" width="12" height="6" fill="#101010" stroke="#202020" stroke-width="0.5"/>
+  <rect x="40" y="12" width="2" height="2" fill="#550000">
+    <animate attributeName="fill" values="#330000;#660000;#330000" dur="3s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="44" y="12" width="2" height="2" fill="#005500">
+    <animate attributeName="fill" values="#003300;#006600;#003300" dur="4s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="38" y="18" width="12" height="1" fill="#202020"/>
+  <rect x="38" y="21" width="12" height="1" fill="#202020"/>
+  <rect x="38" y="24" width="12" height="1" fill="#202020"/>
+  
+  <!-- Sección inferior izquierda - tuberías/cables -->
+  <rect x="12" y="36" width="16" height="20" fill="#151515" stroke="#202020" stroke-width="0.5"/>
+  <!-- Tubos verticales -->
+  <rect x="14" y="36" width="2" height="20" fill="#1d1d1d" stroke="#252525" stroke-width="0.5"/>
+  <rect x="18" y="36" width="2" height="20" fill="#1d1d1d" stroke="#252525" stroke-width="0.5"/>
+  <rect x="22" y="36" width="2" height="20" fill="#1d1d1d" stroke="#252525" stroke-width="0.5"/>
+  <!-- Conectores horizontales -->
+  <rect x="12" y="40" width="16" height="1" fill="#252525"/>
+  <rect x="12" y="46" width="16" height="1" fill="#252525"/>
+  <rect x="12" y="52" width="16" height="1" fill="#252525"/>
+  
+  <!-- Sección inferior derecha - detalles góticos -->
+  <rect x="36" y="36" width="16" height="20" fill="#151515" stroke="#202020" stroke-width="0.5"/>
+  <!-- Símbolo gótico -->
+  <path d="M41 40 L47 40 L44 44 Z" fill="#330000" stroke="#440000" stroke-width="0.5"/>
+  <path d="M41 48 L47 48 L44 52 Z" fill="#330000" stroke="#440000" stroke-width="0.5"/>
+  <path d="M44 38 L44 54" stroke="#252525" stroke-width="0.5"/>
+  
+  <!-- Detalles de desgaste y suciedad -->
+  <rect x="23" y="15" width="3" height="2" fill="#1a1a1a"/>
+  <rect x="42" y="30" width="2" height="3" fill="#1a1a1a"/>
+  <rect x="15" y="49" width="2" height="4" fill="#1a1a1a"/>
+  <rect x="50" y="45" width="4" height="2" fill="#1a1a1a"/>
+  
+  <!-- Manchas y oxidación -->
+  <path d="M10 20 Q12 22, 15 21" fill="none" stroke="#442200" stroke-width="0.5" opacity="0.5"/>
+  <path d="M48 52 Q46 55, 50 55" fill="none" stroke="#442200" stroke-width="0.5" opacity="0.5"/>
+  <rect x="26" y="43" width="2" height="3" fill="#441100" opacity="0.4"/>
+  <rect x="39" y="16" width="3" height="2" fill="#441100" opacity="0.4"/>
+  
+  <!-- Pequeños detalles que parpadean, simulando circuitos dañados -->
+  <rect x="16" y="45" width="1" height="1" fill="#660000">
+    <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="47" y="11" width="1" height="1" fill="#660000">
+    <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="42" y="50" width="1" height="1" fill="#006600">
+    <animate attributeName="opacity" values="0.3;0.8;0.3" dur="4s" repeatCount="indefinite"/>
+  </rect>
+  
+  <!-- Borde sombreado para dar sensación de profundidad -->
+  <rect x="0" y="0" width="64" height="2" fill="#161616"/>
+  <rect x="0" y="0" width="2" height="64" fill="#161616"/>
+  <rect x="62" y="0" width="2" height="64" fill="#161616"/>
+  <rect x="0" y="62" width="64" height="2" fill="#161616"/>
+</svg>

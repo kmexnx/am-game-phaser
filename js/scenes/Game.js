@@ -4,7 +4,6 @@ class Game extends Phaser.Scene {
     }
 
     create() {
-        // Crear el mundo del juego con estética Burton
         this.createWorld();
         
         // Crear personaje jugador
@@ -37,6 +36,18 @@ class Game extends Phaser.Scene {
         
         // Control de estado del juego
         this.gameActive = true;
+
+        // Añadir evento de captura por AM
+        this.am.on('captured', this.playerCaptured, this);
+        // Añadir evento de escape por el portal
+        this.am.on('escaped', this.escapeFromAM, this);
+        // Añadir evento de colisión con los componentes
+        this.am.on('componentCollected', this.collectComponent, this);
+
+        // Añadir evento de colisión con el jugador
+        this.am.on('playerCollision', () => {
+            this.playerCaptured();
+        });
     }
 
     createWorld() {
@@ -99,6 +110,26 @@ class Game extends Phaser.Scene {
             fontFamily: 'monospace',
             fontSize: 14
         }).setScrollFactor(0);
+
+        // Texto de cordura
+        this.sanityText = this.add.text(100, 10, 'Cordura: 100', {
+            fontFamily: 'monospace',
+            fontSize: 14
+        }).setScrollFactor(0).setOrigin(0.5, 0.5);
+        // Barra de cordura
+        this.sanityBar = this.add.rectangle(100, 30, 150, 20, 0x00ff00).setScrollFactor(0);
+        this.sanityBar.setOrigin(0, 0.5);
+        this.sanityBar.setStrokeStyle(2, 0x000000);
+        this.sanityBar.setOrigin(0, 0.5);
+        this.sanityBar.setDepth(1);
+        this.sanityBar.setVisible(true);
+        this.sanityBar.setAlpha(1);
+        this.sanityBar.setScrollFactor(0);
+        this.sanityBar.setInteractive();
+        this.sanityBar.on('pointerdown', () => {
+            // Mostrar mensaje de cordura
+            this.showDialog('Cordura: ' + this.player.sanity);
+        });
         
         // Añadir portal de escape (inicialmente invisible)
         this.escapePortal = this.physics.add.sprite(400, 200, 'player');
@@ -123,6 +154,24 @@ class Game extends Phaser.Scene {
         
         // Mostrar mensaje
         this.showDialog('Has encontrado un componente. (' + this.collectedComponents + '/' + this.totalComponents + ')');
+
+        // Mostrar texto de cordura
+        this.sanityText.setText('Cordura: ' + this.player.sanity);
+
+        // Reducir cordura al recolectar un componente
+        this.player.sanity -= 10;
+        if (this.player.sanity < 0) {
+            this.player.sanity = 0;
+        }
+        this.sanityBar.width = (this.player.sanity / 100) * 150;
+        // Cambiar color de la barra de cordura
+        if (this.player.sanity < 30) {
+            this.sanityBar.fillColor = 0xff0000; // Rojo para baja cordura
+        } else if (this.player.sanity < 60) {
+            this.sanityBar.fillColor = 0xffff00; // Amarillo para cordura media
+        } else {
+            this.sanityBar.fillColor = 0x00ff00; // Verde para cordura alta
+        }
         
         // Si se han recolectado todos los componentes, activar el portal de escape
         if (this.collectedComponents >= this.totalComponents) {
