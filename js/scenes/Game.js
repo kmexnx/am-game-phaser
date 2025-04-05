@@ -34,6 +34,9 @@ class Game extends Phaser.Scene {
         
         // Añadir el sistema de objetivos para ganar el juego
         this.setupObjectives();
+        
+        // Control de estado del juego
+        this.gameActive = true;
     }
 
     createWorld() {
@@ -145,6 +148,11 @@ class Game extends Phaser.Scene {
     }
 
     escapeFromAM() {
+        if (!this.gameActive) return;
+        
+        // Desactivar el juego
+        this.gameActive = false;
+        
         // Mostrar mensaje de victoria
         this.showDialog('¡Has escapado de AM! La pesadilla ha terminado... por ahora.');
         
@@ -156,6 +164,39 @@ class Game extends Phaser.Scene {
         
         // Después de 3 segundos, volver al menú principal
         this.time.delayedCall(3000, () => {
+            this.scene.start('MainMenu');
+        });
+    }
+    
+    playerCaptured() {
+        if (!this.gameActive) return;
+        
+        // Desactivar el juego
+        this.gameActive = false;
+        
+        // Mostrar mensaje de derrota
+        this.showDialog('AM: TE TENGO PARA SIEMPRE. NO HAY ESCAPE. NO TENDRÁS BOCA PARA GRITAR...');
+        
+        // Efecto visual de derrota
+        this.cameras.main.shake(2000, 0.05);
+        
+        // El jugador cambia a color rojo (capturado por AM)
+        this.player.setTint(0xff0000);
+        
+        // Detener toda actividad del juego
+        this.physics.pause();
+        
+        // Hacer que AM crezca en tamaño para simbolizar su victoria
+        this.tweens.add({
+            targets: this.am,
+            scaleX: 2,
+            scaleY: 2,
+            duration: 2000,
+            ease: 'Sine.easeInOut'
+        });
+        
+        // Después de 5 segundos, volver al menú principal
+        this.time.delayedCall(5000, () => {
             this.scene.start('MainMenu');
         });
     }
@@ -200,6 +241,9 @@ class Game extends Phaser.Scene {
     }
 
     update() {
+        // Si el juego no está activo, no actualizar
+        if (!this.gameActive) return;
+        
         // Comprobar tecla Escape para volver al menú
         if (this.escKey && this.escKey.isDown) {
             this.scene.start('MainMenu');
