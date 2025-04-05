@@ -4,6 +4,7 @@ class Game extends Phaser.Scene {
     }
 
     create() {
+        // Crear el mundo del juego con estética Burton
         this.createWorld();
         
         // Crear personaje jugador
@@ -25,7 +26,7 @@ class Game extends Phaser.Scene {
         // Añadir tecla Escape para salir del juego
         this.escKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
         
-        // Interfaz de usuario
+        // Interfaz de usuario (Creada antes de otros elementos para asegurar que esté en la parte superior)
         this.createUI();
         
         // Sistema de diálogos
@@ -36,18 +37,6 @@ class Game extends Phaser.Scene {
         
         // Control de estado del juego
         this.gameActive = true;
-
-        // Añadir evento de captura por AM
-        this.am.on('captured', this.playerCaptured, this);
-        // Añadir evento de escape por el portal
-        this.am.on('escaped', this.escapeFromAM, this);
-        // Añadir evento de colisión con los componentes
-        this.am.on('componentCollected', this.collectComponent, this);
-
-        // Añadir evento de colisión con el jugador
-        this.am.on('playerCollision', () => {
-            this.playerCaptured();
-        });
     }
 
     createWorld() {
@@ -108,28 +97,9 @@ class Game extends Phaser.Scene {
         // Texto para mostrar los componentes recolectados
         this.componentText = this.add.text(650, 30, 'Componentes: 0/' + this.totalComponents, {
             fontFamily: 'monospace',
-            fontSize: 14
-        }).setScrollFactor(0);
-
-        // Texto de cordura
-        this.sanityText = this.add.text(100, 10, 'Cordura: 100', {
-            fontFamily: 'monospace',
-            fontSize: 14
-        }).setScrollFactor(0).setOrigin(0.5, 0.5);
-        // Barra de cordura
-        this.sanityBar = this.add.rectangle(100, 30, 150, 20, 0x00ff00).setScrollFactor(0);
-        this.sanityBar.setOrigin(0, 0.5);
-        this.sanityBar.setStrokeStyle(2, 0x000000);
-        this.sanityBar.setOrigin(0, 0.5);
-        this.sanityBar.setDepth(1);
-        this.sanityBar.setVisible(true);
-        this.sanityBar.setAlpha(1);
-        this.sanityBar.setScrollFactor(0);
-        this.sanityBar.setInteractive();
-        this.sanityBar.on('pointerdown', () => {
-            // Mostrar mensaje de cordura
-            this.showDialog('Cordura: ' + this.player.sanity);
-        });
+            fontSize: 14,
+            color: '#ffffff'
+        }).setScrollFactor(0).setDepth(100);
         
         // Añadir portal de escape (inicialmente invisible)
         this.escapePortal = this.physics.add.sprite(400, 200, 'player');
@@ -154,24 +124,6 @@ class Game extends Phaser.Scene {
         
         // Mostrar mensaje
         this.showDialog('Has encontrado un componente. (' + this.collectedComponents + '/' + this.totalComponents + ')');
-
-        // Mostrar texto de cordura
-        this.sanityText.setText('Cordura: ' + this.player.sanity);
-
-        // Reducir cordura al recolectar un componente
-        this.player.sanity -= 10;
-        if (this.player.sanity < 0) {
-            this.player.sanity = 0;
-        }
-        this.sanityBar.width = (this.player.sanity / 100) * 150;
-        // Cambiar color de la barra de cordura
-        if (this.player.sanity < 30) {
-            this.sanityBar.fillColor = 0xff0000; // Rojo para baja cordura
-        } else if (this.player.sanity < 60) {
-            this.sanityBar.fillColor = 0xffff00; // Amarillo para cordura media
-        } else {
-            this.sanityBar.fillColor = 0x00ff00; // Verde para cordura alta
-        }
         
         // Si se han recolectado todos los componentes, activar el portal de escape
         if (this.collectedComponents >= this.totalComponents) {
@@ -251,26 +203,41 @@ class Game extends Phaser.Scene {
     }
 
     createUI() {
-        // Crear interfaz con estilo Burton
-        this.sanityBar = this.add.rectangle(100, 30, 150, 20, 0xff0000).setScrollFactor(0);
-        this.sanityText = this.add.text(100, 10, 'Cordura', {
+        // Crear un contenedor para la UI que siempre esté visible
+        this.uiContainer = this.add.container(0, 0).setDepth(100).setScrollFactor(0);
+        
+        // Fondo para la barra de cordura para hacerla más visible
+        const sanityBarBg = this.add.rectangle(180, 30, 154, 24, 0x000000, 0.7);
+        
+        // Barra de cordura (ahora más grande y visible)
+        this.sanityBar = this.add.rectangle(180, 30, 150, 20, 0x00ff00);
+        
+        // Texto de cordura (reposicionado y más visible)
+        this.sanityText = this.add.text(180, 30, 'CORDURA', {
             fontFamily: 'monospace',
-            fontSize: 14
-        }).setScrollFactor(0).setOrigin(0.5, 0.5);
+            fontSize: 14,
+            color: '#ffffff',
+            stroke: '#000000',
+            strokeThickness: 3
+        }).setOrigin(0.5, 0.5);
+        
+        // Añadir todos los elementos al contenedor UI
+        this.uiContainer.add([sanityBarBg, this.sanityBar, this.sanityText]);
     }
 
     createDialogSystem() {
         // Crear sistema de diálogos para las interacciones con AM
         const dialogBox = this.add.rectangle(400, 500, 700, 100, 0x000000, 0.7)
             .setScrollFactor(0)
-            .setVisible(false);
+            .setVisible(false)
+            .setDepth(100);
         
         const dialogText = this.add.text(70, 460, '', {
             fontFamily: 'monospace',
             fontSize: 16,
             color: '#ffffff',
             wordWrap: { width: 660 }
-        }).setScrollFactor(0).setVisible(false);
+        }).setScrollFactor(0).setVisible(false).setDepth(100);
         
         return { box: dialogBox, text: dialogText, isActive: false };
     }
