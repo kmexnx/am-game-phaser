@@ -18,7 +18,8 @@ class Game extends Phaser.Scene {
         
         // Configurar cámara
         this.cameras.main.startFollow(this.player);
-        this.cameras.main.setZoom(1.2);
+        // Reducir el zoom para mejorar la visibilidad de la UI
+        this.cameras.main.setZoom(1.0);
         
         // Configurar controles
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -37,6 +38,9 @@ class Game extends Phaser.Scene {
         
         // Control de estado del juego
         this.gameActive = true;
+        
+        // Reproducir música de fondo - Comentado hasta tener archivos de audio válidos
+        // this.playMusic();
     }
 
     createWorld() {
@@ -200,24 +204,26 @@ class Game extends Phaser.Scene {
         const depth = 1000;
         
         // Barra de cordura totalmente rediseñada para máxima visibilidad
+        // Ahora la posicionamos mucho más abajo para asegurarnos de que sea visible
+        
         // 1. Primero creamos un contenedor negro para el fondo
-        const barBg = this.add.rectangle(400, 50, 300, 40, 0x000000, 0.8)
+        const barBg = this.add.rectangle(400, 150, 300, 40, 0x000000, 0.8)
             .setScrollFactor(0)
             .setDepth(depth);
             
         // 2. Borde blanco alrededor para resaltar
-        const barBorder = this.add.rectangle(400, 50, 304, 44, 0xffffff, 0.5)
+        const barBorder = this.add.rectangle(400, 150, 304, 44, 0xffffff, 0.5)
             .setScrollFactor(0)
             .setDepth(depth);
             
         // 3. La barra de cordura en sí, ahora mucho más grande
-        this.sanityBar = this.add.rectangle(400, 50, 290, 30, 0x00ff00)
+        this.sanityBar = this.add.rectangle(400, 150, 290, 30, 0x00ff00)
             .setScrollFactor(0)
             .setDepth(depth + 1)
             .setOrigin(0.5, 0.5);
             
         // 4. Texto grande y claro para la cordura
-        this.sanityText = this.add.text(400, 50, 'CORDURA: 100%', {
+        this.sanityText = this.add.text(400, 150, 'CORDURA: 100%', {
             fontFamily: 'monospace',
             fontSize: 20,
             fontStyle: 'bold',
@@ -228,8 +234,8 @@ class Game extends Phaser.Scene {
           .setDepth(depth + 2)
           .setOrigin(0.5, 0.5);
           
-        // Crear texto para los componentes recolectados
-        this.componentsText = this.add.text(400, 100, 'COMPONENTES: 0/' + this.totalComponents, {
+        // Crear texto para los componentes recolectados - también reposicionado
+        this.componentsText = this.add.text(400, 190, 'COMPONENTES: 0/' + this.totalComponents, {
             fontFamily: 'monospace',
             fontSize: 20,
             fontStyle: 'bold',
@@ -277,6 +283,19 @@ class Game extends Phaser.Scene {
             this.dialogSystem.text.setVisible(false);
             this.dialogSystem.isActive = false;
         });
+    }
+    
+    playMusic() {
+        // Esta función está comentada hasta que tengamos archivos de audio válidos
+        /*
+        if (!this.sound.get('music-theme')) {
+            this.backgroundMusic = this.sound.add('music-theme', {
+                volume: 0.5,
+                loop: true
+            });
+            this.backgroundMusic.play();
+        }
+        */
     }
 
     update() {
