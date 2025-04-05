@@ -17,6 +17,9 @@ class AM extends Phaser.Physics.Arcade.Sprite {
         this.lastSpoken = 0;
         this.speakCooldown = 8000; // 8 segundos entre diálogos
         
+        // Factor de reducción de cordura (aumentado para que sea más peligroso)
+        this.sanityReductionFactor = 0.15;
+        
         // Diálogos de AM con tono ominoso al estilo del relato original
         this.dialogues = [
             'ODIO. DÉJAME DECIRTE CUÁNTO TE HE LLEGADO A ODIAR...',
@@ -59,8 +62,15 @@ class AM extends Phaser.Physics.Arcade.Sprite {
             player.x, player.y
         );
         
+        // Cuanto más cerca esté, más rápido reduce la cordura
         if (distance < 100) {
-            player.reduceSanity(0.05);
+            // Devuelve true si el jugador ha perdido toda la cordura
+            const sanityLost = player.reduceSanity(this.sanityReductionFactor);
+            
+            // Si el jugador ha perdido toda la cordura, informar a la escena Game
+            if (sanityLost) {
+                this.scene.playerCaptured();
+            }
         }
     }
     
